@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "startAll": "concurrently \"json-server --watch db.json\" \"ng serve\"",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

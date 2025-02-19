@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HousingLocation } from './housingLocation';
 
+import { HousingLocation } from './housingLocation';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HousingService {
-  private readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
 
-  url = 'http://localhost:3000/locations';
+  private url = 'http://localhost:3000/locations';
 
-  async getAllHousingLocations(): Promise<HousingLocation[]> {
-    const data = await fetch(this.url);
-    return await data.json() ?? [];
+  constructor(private http: HttpClient) { }
+
+  getAllHousingLocations()  {
+    return this.http.get<HousingLocation[]>(this.url)
   }
-  
-  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
-    const data = await fetch(`${this.url}/${id}`);
-    return await data.json() ?? {};
+
+  getHousingLocationById(id: number){
+    return this.http.get<HousingLocation>(`${this.url}/${id}`);
+  }
+
+  addHousingLocation(housingLocation: HousingLocation) {
+    return this.http.post<HousingLocation>(this.url, housingLocation);
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {
-    console.log(`Homes application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
+    console.log(firstName, lastName, email);
   }
-
-  constructor() { }
 }

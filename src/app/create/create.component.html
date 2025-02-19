@@ -1,0 +1,61 @@
+<div>
+  <form [formGroup]="houseForm" (ngSubmit)="submit()">
+
+    <label for="name">Asunto:</label><br>
+    <input type="text" name="name" id="name" placeholder="Name for the house location" formControlName="name">
+    <div *ngIf="houseForm.get('name')?.invalid && (houseForm.get('name')?.dirty || houseForm.get('name')?.touched)">
+      <p *ngIf="houseForm.get('name')?.errors?.['required']">Name is required</p>
+    </div><br><br>
+
+    <label for="city">City: </label><br>
+    <input type="city" name="city" id="city" placeholder="City" formControlName="city">
+    <div *ngIf="houseForm.get('city')?.invalid && (houseForm.get('city')?.dirty || houseForm.get('city')?.touched)">
+      <p *ngIf="houseForm.get('city')?.errors?.['required']">City is required</p>
+    </div><br><br>
+
+    <label for="state">State: </label><br>
+    <input type="text" name="state" id="state" placeholder="State" formControlName="state">
+    <div *ngIf="houseForm.get('state')?.invalid && (houseForm.get('state')?.dirty || houseForm.get('state')?.touched)">
+      <p *ngIf="houseForm.get('state')?.errors?.['required']">State is required</p>
+    </div><br><br>
+
+    <label for="photo">Photo url: </label><br>
+    <input type="url" name="photo" id="photo" formControlName="photo" placeholder="Photo url">
+    <div *ngIf="houseForm.get('photo')?.invalid && (houseForm.get('fecha')?.dirty || houseForm.get('fecha')?.touched)" class="text-danger">
+    </div><br><br>
+
+    <label for="availableUnits">Available units: </label><br>
+    <input type="number" name="availableUnits" id="availableUnits" placeholder="Available units" formControlName="availableUnits">
+    <div *ngIf="houseForm.get('availableUnits')?.invalid && (houseForm.get('availableUnits')?.dirty || houseForm.get('availableUnits')?.touched)">
+      <p *ngIf="houseForm.get('availableUnits')?.errors?.['required']">State is required</p>
+    </div><br><br>
+
+    <label for="wifi">Wifi: </label><br>
+    <input type="checkbox" name="wifi" id="wifi" formControlName="wifi"><br><br>
+
+    <label for="laundry">Laundry: </label><br>
+    <input type="checkbox" name="laundry" id="laundry" formControlName="laundry"><br><br>
+
+    <label>Security: </label><br>
+    <div>
+      <div>
+        <input type="checkbox" name="security" id="alarm" value="alarm" formControlName="security">
+        <label for="alarm">Alarm</label>
+      </div>
+      <div>
+        <input type="checkbox" name="security" id="camera" value="camera" formControlName="security">
+        <label for="camera">Cameras</label>
+      </div>
+      <div>
+        <input type="checkbox" name="security" id="reforcedDoors" value="reforcedDoors" formControlName="security">
+        <label for="reforcedDoors">Reforced Doors</label>
+      </div>
+      <div>
+        <input type="checkbox" name="security" id="smokeDetector" value="smokeDetector" formControlName="security">
+        <label for="smokeDetector">Smoke detectors</label>
+      </div>
+    </div><br><br>
+
+    <div><button type="submit" [disabled]="!houseForm.valid">Submit</button></div>
+  </form>
+</div>

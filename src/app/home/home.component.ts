@@ -3,52 +3,43 @@ import { HousingLocationComponent } from '../housing-location/housing-location.c
 import { CommonModule } from '@angular/common';
 import { HousingLocation } from '../housingLocation';
 import { HousingService } from '../housing.service';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ 
+  imports: [
     CommonModule,
     HousingLocationComponent,
+    RouterLink,
   ],
-  template: `
-    <section>
-    <form>
-      <input type="text" placeholder="Filter by city" #filter>
-      <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
-    </form>
-  </section>
-  <section class="results">
-      <app-housing-location *ngFor="let housingLocation of filteredLocationList" 
-      [housingLocation]="housingLocation"></app-housing-location>
-  </section>
-  `,
+  templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+ export class HomeComponent {
   readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
 
   housingLocationList: HousingLocation[] = [];
 
   filteredLocationList: HousingLocation[] = [];
 
-  housingService: HousingService = inject(HousingService);
+  // private housingService: HousingService = inject(HousingService);
 
   filterResults(text: string) {
     if (!text) {
       this.filteredLocationList = this.housingLocationList;
       return;
     }
-  
+
     this.filteredLocationList = this.housingLocationList.filter(
       housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
     );
   }
 
-  constructor() {
-    this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocation[]) => {
-      this.housingLocationList = housingLocationList;
-      this.filteredLocationList = housingLocationList;
-    });
-  }
+  //constructor() {
+  //  this.housingService.getAllHousingLocations().subscribe((housingLocationList: HousingLocation[]) => {
+  //    this.housingLocationList = housingLocationList;
+  //    this.filteredLocationList = housingLocationList;
+  //   });
+//  }
 }
