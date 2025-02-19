@@ -23,7 +23,7 @@ import {RouterLink} from "@angular/router";
 
   filteredLocationList: HousingLocation[] = [];
 
-  // private housingService: HousingService = inject(HousingService);
+   private housingService: HousingService = inject(HousingService);
 
   filterResults(text: string) {
     if (!text) {
@@ -36,10 +36,10 @@ import {RouterLink} from "@angular/router";
     );
   }
 
-  //constructor() {
-  //  this.housingService.getAllHousingLocations().subscribe((housingLocationList: HousingLocation[]) => {
-  //    this.housingLocationList = housingLocationList;
-  //    this.filteredLocationList = housingLocationList;
-  //   });
-//  }
+  constructor() {
+   this.housingService.getAllHousingLocations().subscribe((housingLocationList: HousingLocation[]) => {
+     this.housingLocationList = housingLocationList;
+     this.filteredLocationList = housingLocationList;
+   });
+ }
 }

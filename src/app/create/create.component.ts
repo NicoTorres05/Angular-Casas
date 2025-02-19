@@ -15,12 +15,12 @@ import {HousingService} from "../housing.service";
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
- // private housingService: HousingService = inject(HousingService)
+  private housingService: HousingService = inject(HousingService)
   private houseList: HousingLocation[] = [];
 
-  // constructor() {
-  //   this.housingService.getAllHousingLocations().subscribe((houseList: HousingLocation[]) => {this.houseList = houseList;})
-  // }
+  constructor() {
+     this.housingService.getAllHousingLocations().subscribe((houseList: HousingLocation[]) => {this.houseList = houseList;})
+   }
 
   houseForm = new FormGroup({
     "name": new FormControl("", Validators.required),
@@ -53,7 +53,7 @@ export class CreateComponent {
         laundry: laundry!,
         security: this.houseForm.value.security!
       }
-      // this.housingService.addHousingLocation(newHouse).subscribe(() => {this.houseList.push(newHouse)})
+      this.housingService.addHousingLocation(newHouse).subscribe(() => {this.houseList.push(newHouse)})
       this.houseForm.reset();
     }
   }
